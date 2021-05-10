@@ -1,0 +1,75 @@
+A51 MACRO ASSEMBLER  TIMER                                                                05/10/2021 06:50:05 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Timer.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Timer.scm SET(SMALL) DEBUG PRINT(.\Listings\Timer.lst) OBJECT(.\Objects
+                      \Timer.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG             0000H
+0000 D2B1              2                     SETB  P3.1
+0002 D2B2              3                     SETB  P3.2
+0004 C244              4                     CLR   44H
+0006 C245              5                     CLR   45H
+0008 754100            6     __CULCULATE_INIT:    MOV 41H,#00H  ;   ±ê¼ÇÎ»
+000B 754200            7                     MOV 42H,#00H  ;   ¸öÎ»
+000E 754300            8                     MOV 43H,#00H  ;   Ê®Î»
+0011 7400              9                     MOV A,#00H
+0013 AA44             10     __WHETHER_ADD:  MOV R2,44H
+0015 BA0909           11                     CJNE    R2,#9,__CUL_H
+0018 20B1FD           12                     JB  P3.1,$
+001B 30B11F           13                     JNB P3.1,__ADD_G  ;¸öÎ»¼Ó1
+001E 120049           14                     LCALL   __DELAY_10MS
+0021 AA45             15     __CUL_H:        MOV R2,45H
+0023 BA092C           16                     CJNE    R2,#9,__MAIN
+0026 7A00             17                     MOV R2,#00H
+0028 20B2FD           18                     JB  P3.2,$
+002B 30B215           19                     JNB P3.2,__ADD_S  ;Ê®Î»¼Ó1
+002E 120049           20                     LCALL   __DELAY_10MS
+0031 20B303           21                     JB P3.3,__WHETHER_END     ;ÅÐ¶ÏÉèÖÃ±ê¼ÇÎ»
+0034 754101           22                     MOV 41H,#1
+0037 E541             23     __WHETHER_END:  MOV A,41H
+0039 7017             24                     JNZ __MAIN          ;1£¬ÔòÌø×ªÖ÷º¯Ê
+003B 0113             25                     AJMP  __WHETHER_ADD
+003D 0542             26     __ADD_G:        INC 42H
+003F 0544             27                     INC 44H             ;µÍÎ»´æ¸öÎ»
+0041 0113             28                     AJMP  __WHETHER_ADD
+0043 0543             29     __ADD_S:        INC 43H           ;¸ßÎ»´æÊ®Î»
+0045 0545             30                     INC 45H
+0047 0113             31                     AJMP  __WHETHER_ADD
+0049 7814             32     __DELAY_10MS:          MOV R0,#20
+004B 79FA             33     __DELAY_10MS_1:        MOV R1,#250
+004D D9FE             34                            DJNZ R1,$
+004F D8FA             35                            DJNZ R0,__DELAY_10MS_1
+0051 22               36                            RET
+0052                  37     __MAIN: 
+                      38                     END
+                                            
+                                            
+                                             
+A51 MACRO ASSEMBLER  TIMER                                                                05/10/2021 06:50:05 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+P3 . . . . . . . .  D ADDR   00B0H   A   
+__ADD_G. . . . . .  C ADDR   003DH   A   
+__ADD_S. . . . . .  C ADDR   0043H   A   
+__CULCULATE_INIT .  C ADDR   0008H   A   
+__CUL_H. . . . . .  C ADDR   0021H   A   
+__DELAY_10MS . . .  C ADDR   0049H   A   
+__DELAY_10MS_1 . .  C ADDR   004BH   A   
+__MAIN . . . . . .  C ADDR   0052H   A   
+__WHETHER_ADD. . .  C ADDR   0013H   A   
+__WHETHER_END. . .  C ADDR   0037H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
